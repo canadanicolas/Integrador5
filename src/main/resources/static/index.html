@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Supermercado Integrador 5</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+
+
+<body>
+  <header>
+    <h1>Supermercado "Integrador 5"</h1>
+  </header>
+  <nav>
+    <ul class="menu" id="menuid">
+      <li class="li-bar"><a href="index.html">Productos</a></li>
+      <li class="li-bar"><a id="stock">Stock</a></li>
+      <li class="li-bar"><a id="compra">Compra</a></li>
+      <li class="li-bar"><a id="reportes">Reportes</a></li>
+      <li class="li-bar"><a id="cliente">Clientes</a></li>
+    </ul>
+  </nav>
+  <section id="inicioPag">
+    <div>
+      <h2>Agregar un producto</h2>
+      <input type="number" placeholder="id" id="idAddProducto">
+      <input type="text" placeholder="nombre" id="idAddNombre">
+      <input type="number" placeholder="precio" id="idAddPrecio">
+      <button type="button" id="submitPostProducto">Aceptar</button>
+    </div>
+
+    <div>
+      <h2>Editar un producto</h2>
+      <input type="number" placeholder="id" id="idPutProducto">
+      <input type="text" placeholder="nombre" id="idPutNombre">
+      <input type="number" placeholder="precio" id="idPutPrecio">
+      <button type="button" id="submitPutProducto">Aceptar</button>
+    </div>
+
+    <div>
+      <h2>Borrar un producto</h2>
+      <input type="number" placeholder="id" id="idDeleteProducto">
+      <button type="button" id="deleteProducto" class="botonDelete">Aceptar</button>
+    </div>
+  </section>
+
+</body>
+    <script>
+      document.querySelector("#submitPostProducto").addEventListener("click", postProducto);
+      document.querySelector("#submitPutProducto").addEventListener("click", putProducto);
+      document.querySelector("#deleteProducto").addEventListener("click", deleteProducto);
+      
+function postProducto() {
+	let id = document.querySelector("#idAddProducto").value;
+	let nombre = document.querySelector("#idAddNombre").value;
+	let precio = document.querySelector("#idAddPrecio").value;
+
+	let producto = {
+		"id": id,
+		"nombre": nombre,
+		"precio": precio
+	};
+	console.log(producto);
+	let url = "producto/add";
+	fetch(url, {
+		'method': 'POST',
+		'headers': {
+			'Content-Type': 'application/json',
+			'Accept': 'application/json'
+		},
+		'body': JSON.stringify(producto)
+	})
+}
+
+function putProducto() {
+	let id = document.querySelector("#idPutProducto").value;
+	let nombre = document.querySelector("#idPutNombre").value;
+	let precio = document.querySelector("#idPutPrecio").value;
+	let producto = {
+		"id": id,
+		"nombre": nombre,
+		"precio": precio,
+	};
+	let url = "producto/update/" + id;
+	fetch(url, {
+		"method": "PUT",
+		"headers": { "Content-Type": "application/json" },
+		"body": JSON.stringify(producto)
+	}).then(function (r) {
+		if (!r.ok) {
+			console.log("Error")
+		}
+		return r.json()
+	})
+		.then(function (json) {
+			console.log("ok");
+		})
+		.catch(function (e) {
+			console.log(e)
+		})
+}
+
+function deleteProducto() {
+	let id = document.querySelector("#idDeleteProducto").value;
+	let url = "producto/delete/" + id;
+	fetch(url, {
+		"method": "DELETE",
+		"headers": { "Content-Type": "application/json" },
+	}).then(function (r) {
+		if (!r.ok) {
+			console.log("Error")
+		}
+		return r.json()
+	})
+		.then(function (json) {
+			console.log("ok");
+		})
+		.catch(function (e) {
+			console.log(e)
+		})
+}
+    </script>
+<script src="main.js" charset="utf-8"></script>
+
+
+</html>
