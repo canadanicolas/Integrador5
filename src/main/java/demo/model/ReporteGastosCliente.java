@@ -1,5 +1,4 @@
 package demo.model;
-import java.util.ArrayList;
 /**
  * clase que define la entidad del reporte de los gastos del cliente.
  * @see Cliente

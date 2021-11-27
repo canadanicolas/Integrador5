@@ -2,7 +2,6 @@ package demo.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import demo.repository.ProductoRepository;
 /**
  * clase que define la entidad del reporte de ventas por dia.
  * @see ArrayList

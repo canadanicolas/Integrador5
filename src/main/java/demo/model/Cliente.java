@@ -13,7 +13,6 @@ import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import demo.repository.ClienteRepository;
 import lombok.Data;
 
 /**

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -23,7 +22,6 @@ import demo.model.Cliente;
 import demo.model.Compra;
 import demo.model.Producto;
 import demo.model.ReporteGastosCliente;
-import demo.model.Stock;
 import demo.repository.ClienteRepository;
 
 @RestController
@@ -121,6 +119,7 @@ public class ClienteController {
 	 * @return el cliente editado, ya sea el del id o el que ya venia editado seteandole su id.
 	 * @see Long ClienteRepository Cliente
 	 */
+	@SuppressWarnings("rawtypes")
 	@PostMapping("/comprar/{idCompra}/{idCliente}")
 	public ResponseEntity compraCliente(@PathVariable Long idCompra, @PathVariable Long idCliente) {
 
